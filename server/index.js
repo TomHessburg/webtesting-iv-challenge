@@ -7,14 +7,14 @@ const db = require('../data/dbConfig.js');
 server.get('/', (req,res) => {
     db('users')
         .then(response => res.status(200).json(response))
-        .catch(err => console.log(err));
+        .catch(err => res.status(500).json(err));
 })
 
 server.post('/', (req,res) => {
     db('users')
         .insert(req.body)
         .then(response => res.status(201).json(response))
-        .catch(err => console.log(err));
+        .catch(err => res.status(500).json(err));
 })
 
 server.delete('/', (req,res) => {
@@ -23,7 +23,7 @@ server.delete('/', (req,res) => {
         .delete()
         .where({id})
         .then(response => res.status(200).json(response))
-        .catch(err => console.log(err));
+        .catch(err => res.status(500).json(err));
 })
 
 

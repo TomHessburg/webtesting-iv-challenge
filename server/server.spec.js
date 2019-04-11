@@ -4,9 +4,9 @@ const server = require('./index.js');
 const db = require('../data/dbConfig.js');
 
 
-beforeEach(async () => {
-    await db('users').truncate();
-});
+// beforeEach(async () => {
+//     await db('users').truncate();
+// });
 
 describe('server.js', () => {
     describe('GET', () => {
@@ -41,10 +41,16 @@ describe('server.js', () => {
 
     describe('DELETE', () => {
         it('should return a 200 on delete',  () => {
+
             request(server)
-                .delete('/', {id: 1})
-                .first()
-                .expect(200);
+                .post('/', {username: 'jimbo'})
+                .then(response => {
+                    request(server)
+                        .delete('/', {id: 1})
+                        .first()
+                        .expect(200);
+                })
+            
             
         })
         it('should return 0 users after delete', async () => {
