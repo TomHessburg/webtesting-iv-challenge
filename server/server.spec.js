@@ -12,18 +12,24 @@ describe('server.js', () => {
     describe('GET', () => {
         it('should return a 200 on GET', () => {
             return request(server)
-                    .get('/')
-                    .expect(200)
+                .get('/')
+                .then(response => {
+                expect(response.status).toBe(200);
+                })  
+                .catch();
         })
     })
     describe('POST', () => {
         it('should return a 201 on POST',  () => {
             request(server)
                 .post('/', {username: 'jimbo'})
-                .expect(201);
+                .then(response => {
+                expect(response.status).toBe(201);
+                })  
+                .catch();
             
-        })
-        it('should insert the user', () => {
+        }) 
+        it('expect response to be JSON', () => {
             request(server)
                 .post('/', {username: 'jimbo'})
                 .then(response => {

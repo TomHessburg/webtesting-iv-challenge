@@ -4,7 +4,7 @@
 	"description": "Server Testing Project",
 	"main": "server.js",
 	"scripts": {
-		"test": "jest --watch --verbose",
+		"test": "jest --watch",
 		"server": "nodemon"
 	},
 	"jest": {
@@ -22,12 +22,12 @@
 	},
 	"homepage": "https://github.com/LambdaSchool/Server-Testing#readme",
 	"devDependencies": {
-		"jest": "^23.6.0",
-		"supertest": "^3.3.0"
+		"jest": "^24.7.1",
+		"supertest": "^4.0.2"
 	},
 	"dependencies": {
 		"express": "^4.16.4",
-		"knex": "^0.16.3",
+		"knex": "^0.16.4",
 		"knex-cleaner": "^1.1.4",
 		"nodemon": "^1.18.11",
 		"sqlite3": "^4.0.6"
