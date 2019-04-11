@@ -50,18 +50,18 @@ describe('server.js', () => {
                 .then(response => {
                     request(server)
                         .delete('/')
-                        .where({id: 1})
-                        .first()
+                        .send({id: 1})
                         .expect(200);
                 })
         })
-        // it('should return 0 users after delete',  () => {
+        it('should return 0 users after delete',  () => {
             
-        //     rreturn equest(server)
-        //             .delete('/')
-        //             .where({id: 1})
-        //             .first()
-        //             .expect(200);
-        // })
+            return request(server)
+                    .delete('/')
+                    .send({id: 1})
+                    .then(response => {
+                        expect(response.text).toBe("1")
+                    })
+        })
     })
 })
