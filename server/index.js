@@ -10,5 +10,21 @@ server.get('/', (req,res) => {
         .catch(err => console.log(err));
 })
 
+server.post('/', (req,res) => {
+    db('users')
+        .insert(req.body)
+        .then(response => res.status(201).json(response))
+        .catch(err => console.log(err));
+})
+
+server.delete('/', (req,res) => {
+    const id = req.body.id;
+    db('users')
+        .delete()
+        .where({id})
+        .then(response => res.status(200).json(response))
+        .catch(err => console.log(err));
+})
+
 
 module.exports = server;
