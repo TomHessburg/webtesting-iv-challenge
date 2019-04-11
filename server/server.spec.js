@@ -4,9 +4,9 @@ const server = require('./index.js');
 const db = require('../data/dbConfig.js');
 
 
-// beforeEach(async () => {
-//     await db('users').truncate();
-// });
+beforeEach(async () => {
+    await db('users').truncate();
+});
 
 describe('server.js', () => {
     describe('GET', () => {
@@ -21,19 +21,21 @@ describe('server.js', () => {
     })
     describe('POST', () => {
         it('should return a 201 on POST',  () => {
-            request(server)
-                .post('/', {username: 'jimbo'})
+            return request(server)
+                .post('/')
+                .send({username: 'jimbo'})
                 .then(response => {
                 expect(response.status).toBe(201);
                 })  
                 .catch();
             
         }) 
-        it('expect response to be JSON', () => {
-            request(server)
-                .post('/', {username: 'jimbo'})
+        it('expect response to be 1', () => {
+            return request(server)
+                .post('/')
+                .send({username: 'jimbo'})
                 .then(response => {
-                    expect(response.type).toBe('application/json')
+                    expect(response.text).toBe("[1]")
                 })
         })
     })
@@ -43,21 +45,23 @@ describe('server.js', () => {
         it('should return a 200 on delete',  () => {
 
             request(server)
-                .post('/', {username: 'jimbo'})
+                .post('/')
+                .send({username: 'jimbo'})
                 .then(response => {
                     request(server)
-                        .delete('/', {id: 1})
+                        .delete('/')
+                        .where({id: 1})
                         .first()
                         .expect(200);
                 })
-            
-            
         })
-        it('should return 0 users after delete', async () => {
-            const users = await db('users');
-
-            expect(users).toHaveLength(0);
+        // it('should return 0 users after delete',  () => {
             
-        })
+        //     rreturn equest(server)
+        //             .delete('/')
+        //             .where({id: 1})
+        //             .first()
+        //             .expect(200);
+        // })
     })
 })
